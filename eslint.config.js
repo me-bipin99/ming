@@ -23,10 +23,6 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
-      'no-unused-vars': [
-        'warn',
-        { varsIgnorePattern: 'React' }, // Add this line to ignore unused 'React'
-      ],
     },
   }
 );
