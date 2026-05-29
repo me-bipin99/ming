@@ -31,7 +31,7 @@ export const menuItems = [
     description: "Flaky croissant with savory sausage",
     price: "Rs. 150"
   },
-  
+
   // Wraps
   {
     category: 'wraps',
