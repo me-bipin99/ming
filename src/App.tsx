@@ -7,12 +7,14 @@ import About from './components/About';
 import Footer from './components/Footer';
 import { MomoPopup } from './components/MomoPopup';
 import Story from './components/Story';
+import FullMenu from './components/FullMenu';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [view, setView] = useState<'home' | 'menu'>('home');
 
   useEffect(() => {
-    // Simulate loading time (remove this in production and use real loading states)
+    // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -20,18 +22,31 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Smooth scroll back to top when switching pages
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [view]);
+
   if (isLoading) {
     return <Preloader />;
   }
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
+      <Navbar currentView={view} onNavigate={setView} />
       <MomoPopup />
-      <Hero />
-      <Story />
-      <FeaturedItems />
-      <About />
+      
+      {view === 'home' ? (
+        <>
+          <Hero onNavigate={setView} />
+          <Story />
+          <FeaturedItems onNavigate={setView} />
+          <About />
+        </>
+      ) : (
+        <FullMenu onNavigate={setView} />
+      )}
+      
       <Footer />
     </div>
   );

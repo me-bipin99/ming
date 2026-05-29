@@ -2,7 +2,11 @@ import image1 from '../assets/images/home1.jpg';
 import image4 from '../assets/images/fryrice.jpg';
 import blacktea from '../assets/images/blacktea2.jpg';
 
-export default function Hero() {
+interface HeroProps {
+  onNavigate: (view: 'home' | 'menu') => void;
+}
+
+export default function Hero({ onNavigate }: HeroProps) {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -32,13 +36,13 @@ export default function Hero() {
             </p>
             <div className="flex gap-4 flex-wrap">
               <button 
-                onClick={() => scrollToSection('menu')}
-                className="px-8 py-3 bg-amber-600 text-white hover:bg-amber-700 transition rounded-md">
+                onClick={() => onNavigate('menu')}
+                className="px-8 py-3 bg-amber-600 text-white hover:bg-amber-700 hover:shadow-lg hover:shadow-amber-600/20 active:scale-95 transition-all duration-300 rounded-lg font-medium">
                 View Menu
               </button>
               <button 
                 onClick={() => scrollToSection('story')}
-                className="px-8 py-3 border-2 border-white text-white hover:bg-white hover:text-gray-900 transition rounded-md"
+                className="px-8 py-3 border-2 border-white text-white hover:bg-white hover:text-gray-900 active:scale-95 transition-all duration-300 rounded-lg font-medium"
               >
                 Our Story
               </button>
